@@ -2,7 +2,9 @@ name: Next.js dev Check
 
 on:
   push:
-    branches: [ "development" ]  # Solo cuando llega a la rama estable
+    branches: [ "development" ]
+  pull_request:
+    branches: [ "development" ]
 
 jobs:
   validate_production:
