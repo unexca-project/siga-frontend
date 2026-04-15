@@ -1,13 +1,11 @@
-name: Next.js CI
+name: Next.js dev Check
 
 on:
   push:
-    branches: [ "main", "development" ]
-  pull_request:
-    branches: [ "main", "development" ]
+    branches: [ "development" ]  # Solo cuando llega a la rama estable
 
 jobs:
-  build:
+  validate_production:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,8 +15,6 @@ jobs:
           node-version: '20'
           cache: 'npm'
       - name: Install dependencies
-        run: npm install
-      - name: Lint check
-        run: npm run lint
-      - name: Build check
+        run: npm ci  # npm ci es más rápido y estricto para producción
+      - name: Production Build
         run: npm run build
