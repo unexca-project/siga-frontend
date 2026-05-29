@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #f3f4f6;
+  color: #1f2937;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+/* Prueba de carga de CSS */
+.prueba-color {
+  background-color: red !important;
+  display: block;
+  height: 100px;
+  width: 100px;
+}
+
+@layer components {
+  /* Estilo para tus inputs de login */
+  .auth-input {
+    @apply w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl 
+           focus:ring-2 focus:ring-blue-500 outline-none transition-all placeholder:text-slate-400;
+  }
+
+  /* Estilo para tus botones de login */
+  .auth-button {
+    @apply w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold 
+           rounded-xl transition-all shadow-lg shadow-slate-200 disabled:opacity-50 mt-4;
+  }
+}

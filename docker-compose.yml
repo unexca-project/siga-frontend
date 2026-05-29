@@ -1,0 +1,18 @@
+services:
+  siga-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: siga-frontend-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    env_file:
+      - .env.local
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true  # <--- Esto activa el Fast Refresh en Windows
+    command: npm run dev
