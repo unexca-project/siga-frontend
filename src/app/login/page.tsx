@@ -79,22 +79,32 @@ export default function LoginPage() {
             </div>
 
             {error && (
-              <div className="mb-5 rounded-2xl border border-red-100 bg-red-50 p-4 text-sm font-semibold text-red-600">
+              <div
+                role="alert"
+                aria-live="assertive"
+                className="mb-5 rounded-2xl border border-red-100 bg-red-50 p-4 text-sm font-semibold text-red-600"
+              >
                 {error}
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-400">
+                <label htmlFor="email" className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-400">
                   Correo institucional
                 </label>
 
                 <div className="flex h-14 items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 transition focus-within:border-blue-500 focus-within:bg-white focus-within:ring-4 focus-within:ring-blue-100">
                   <Mail size={18} className="text-slate-400" />
+
                   <input
+                    id="email"
+                    name="email"
                     type="email"
                     required
+                    maxLength={254}
+                    autoComplete="email"
+                    aria-label="Correo institucional"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="usuario@corpojuventud.gob.ve"
@@ -104,42 +114,46 @@ export default function LoginPage() {
               </div>
 
               <div>
-                <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-400">
-                  Contraseña
+                <label htmlFor="password" className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-400">
+                    Contraseña
                 </label>
+                  <div className="flex h-14 items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 transition focus-within:border-blue-500 focus-within:bg-white focus-within:ring-4 focus-within:ring-blue-100">
+                    <LockKeyhole size={18} className="text-slate-400" />
 
-                <div className="flex h-14 items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 transition focus-within:border-blue-500 focus-within:bg-white focus-within:ring-4 focus-within:ring-blue-100">
-                  <LockKeyhole size={18} className="text-slate-400" />
+                    <input
+                      id="password"
+                      name="password"
+                      type={showPassword ? 'text' : 'password'}
+                      required
+                      minLength={8}
+                      maxLength={128}
+                      autoComplete="current-password"
+                      aria-label="Contraseña"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="••••••••"
+                      className="w-full bg-transparent text-sm font-medium text-slate-900 outline-none placeholder:text-slate-300"
+                    />
 
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••"
-                    className="w-full bg-transparent text-sm font-medium text-slate-900 outline-none placeholder:text-slate-300"
-                  />
-
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="text-slate-300 transition hover:text-slate-500"
-                    aria-label={
-                      showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'
-                    }
-                  >
-                    {showPassword ? (
-                      <EyeOff size={18} />
-                    ) : (
-                      <Eye size={18} />
-                    )}
-                  </button>
-                </div>
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="text-slate-300 transition hover:text-slate-500"
+                      aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+                      aria-pressed={showPassword}
+                    >
+                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
               </div>
 
               <button
+                id="login-submit"
+                name="login-submit"
+                data-testid="login-submit"
                 type="submit"
                 disabled={isSubmitting}
+                aria-label="Ingresar al sistema"
                 className="h-14 w-full rounded-2xl bg-[#0B2A4A] text-sm font-extrabold text-white shadow-xl shadow-blue-100 transition hover:bg-blue-800 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isSubmitting ? 'Validando acceso...' : 'Ingresar al sistema'}
