@@ -1,10 +1,11 @@
 export interface User {
-  id: number;
+  id: string;
   username: string;
   email: string;
-  rol: 'Administrador' | 'Coordinador' | 'Profesor' | 'Estudiante' | null;
+  nombre?: string;
+  apellido?: string;
+  rol?: string | null;
 }
-
 export interface TokenResponse {
   access: string;
   refresh: string;
