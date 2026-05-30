@@ -2,8 +2,11 @@ import { AuthProvider } from '../context/AuthContext';
 import './globals.css';
 
 export const metadata = {
-  title: 'SIGA - UNEXCA',
-  description: 'Sistema Integrado de Gestión Académica',
+  title: {
+    default: 'Intranet Corpojuventud',
+    template: '%s | Intranet Corpojuventud',
+  },
+  description: 'Plataforma institucional para la gestión operativa y administrativa',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

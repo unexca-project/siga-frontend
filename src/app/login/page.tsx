@@ -43,9 +43,9 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="fixed inset-0 flex h-screen w-screen overflow-hidden bg-[#f4f8fb] font-sans">
+    <main className="min-h-screen w-full overflow-y-auto bg-[#f4f8fb] font-sans lg:fixed lg:inset-0 lg:flex lg:h-screen lg:w-screen lg:overflow-hidden lg:bg-white">
       {/* IZQUIERDA */}
-      <section className="relative flex w-full flex-col bg-white lg:w-[46%]">
+      <section className="relative flex min-h-screen w-full flex-col bg-white lg:w-[46%]">
         <div className="absolute left-8 top-7 flex items-center gap-3">
           <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#0B2A4A] text-white shadow-lg shadow-blue-100">
             <ShieldCheck size={24} />
@@ -61,7 +61,7 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <div className="flex flex-1 items-center justify-center px-8 pt-16">
+        <div className="flex flex-1 items-center justify-center px-6 py-24 lg:px-8 lg:py-0">
           <div className="w-full max-w-[420px]">
             <div className="mb-8">
               <span className="mb-4 inline-flex rounded-full bg-blue-50 px-4 py-2 text-xs font-bold uppercase tracking-wider text-blue-700">
