@@ -1,3 +1,5 @@
+'use client';
+import { useState } from 'react';
 import Sidebar from '@/components/ui/layout/Sidebar';
 import Navbar from '@/components/ui/layout/Navbar';
 import {
@@ -89,10 +91,14 @@ const activity = [
 ];
 
 export default function DashboardPage() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <div className="min-h-screen bg-slate-50">
-      <Sidebar />
-      <Navbar />
+      <Sidebar
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
+      <Navbar onMenuClick={() => setSidebarOpen(true)} />
 
       <main className="p-6 lg:ml-72">
         <section className="relative overflow-hidden rounded-[2rem] bg-gradient-to-r from-slate-950 via-blue-950 to-blue-700 p-8 text-white shadow-xl">

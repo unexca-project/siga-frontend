@@ -2,10 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get('token')?.value;
-  const { pathname } = request.nextUrl;
+  const pathname = request.nextUrl.pathname;
 
-  if (pathname.startsWith('/dashboard') && !token) {
-    return NextResponse.redirect(new URL('/login', request.url));
+  console.log('Middleware ejecutado:', pathname, 'token:', !!token);
+
+  if (pathname === '/dashboard' || pathname.startsWith('/dashboard/')) {
+    if (!token) {
+      return NextResponse.redirect(new URL('/login', request.url));
+    }
   }
 
   if (pathname === '/login' && token) {
@@ -16,5 +20,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/login'],
+  matcher: ['/dashboard', '/dashboard/:path*', '/login'],
 };
