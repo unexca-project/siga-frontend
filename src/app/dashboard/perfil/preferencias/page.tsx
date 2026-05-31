@@ -5,7 +5,7 @@ import { ArrowLeft, ChevronRight, Settings } from 'lucide-react';
 
 export default function PreferenciasPage() {
   return (
-    <main className="p-4 lg:p-6">
+    <div className="p-4 lg:p-6">
       <div className="mb-4">
         <Link
           id="preferences-back-profile"
@@ -63,6 +63,6 @@ export default function PreferenciasPage() {
           idioma, notificaciones y preferencias personales.
         </p>
       </section>
-    </main>
+    </div>
   );
 }

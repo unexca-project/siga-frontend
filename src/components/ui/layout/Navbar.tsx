@@ -22,9 +22,13 @@ import { useAuth } from '@/context/AuthContext';
 
 interface NavbarProps {
   onMenuClick?: () => void;
+  isSidebarCollapsed?: boolean;
 }
 
-export default function Navbar({ onMenuClick }: NavbarProps) {
+export default function Navbar({
+  onMenuClick,
+  isSidebarCollapsed = false,
+}: NavbarProps) {
   const { logout, user } = useAuth();
   const [openProfileMenu, setOpenProfileMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -46,14 +50,20 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
     };
   }, []);
 
+  const fullName =
+    `${user?.nombre || ''} ${user?.apellido || ''}`.trim() ||
+    user?.username ||
+    'Usuario';
+
   return (
     <header
       id="main-navbar"
       role="banner"
-      className="sticky top-0 z-30 flex h-20 items-center justify-between border-b border-slate-200 bg-white/90 px-4 backdrop-blur lg:ml-72 lg:px-6"
+      className={`sticky top-0 z-30 flex h-20 items-center justify-between border-b border-slate-200 bg-white/90 px-4 backdrop-blur transition-all duration-300 lg:px-6 ${
+        isSidebarCollapsed ? 'lg:ml-20' : 'lg:ml-72'
+      }`}
     >
       <div className="flex items-center gap-4">
-        {/* Botón para abrir el menú lateral en pantallas pequeñas */}
         <button
           id="navbar-menu-toggle"
           name="navbar-menu-toggle"
@@ -121,24 +131,21 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
               aria-label="Menú de usuario"
               className="absolute right-0 mt-3 w-64 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl"
             >
-            <div className="flex items-center gap-3 border-b border-slate-100 px-5 py-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100 text-blue-600">
-                <UserRound size={18} />
+              <div className="flex items-center gap-3 border-b border-slate-100 px-5 py-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100 text-blue-600">
+                  <UserRound size={18} aria-hidden="true" />
+                </div>
+
+                <div className="min-w-0">
+                  <p className="truncate font-bold text-slate-900">
+                    {fullName}
+                  </p>
+
+                  <p className="truncate text-xs text-slate-400">
+                    {user?.email || 'Correo no disponible'}
+                  </p>
+                </div>
               </div>
-
-              <div>
-                <p className="font-bold text-slate-900">
-                  {`${user?.nombre || ''} ${user?.apellido || ''}`.trim() ||
-                    user?.username ||
-                    'Usuario'}
-                </p>
-
-                <p className="text-xs text-slate-400">
-                  {user?.email}
-                </p>
-              </div>
-            </div>
-
 
               <div className="p-2">
                 <Link

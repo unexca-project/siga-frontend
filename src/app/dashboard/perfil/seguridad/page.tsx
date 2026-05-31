@@ -54,7 +54,7 @@ export default function SeguridadPage() {
   };
 
   return (
-    <main className="p-4 lg:p-6">
+    <div className="p-4 lg:p-6">
       <div className="mb-4">
         <Link
           id="security-back-profile"
@@ -183,7 +183,7 @@ export default function SeguridadPage() {
           </ul>
         </aside>
       </section>
-    </main>
+    </div>
   );
 }
 

@@ -19,7 +19,7 @@ export default function PerfilPage() {
   'No disponible';
 
   return (
-    <main className="p-4 lg:p-6">
+    <div className="p-4 lg:p-6">
         <div className="mb-6">
         <Link
             id="profile-back-dashboard"
@@ -119,7 +119,7 @@ export default function PerfilPage() {
           </a>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
 

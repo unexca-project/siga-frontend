@@ -1,7 +1,5 @@
 'use client';
 import { useState } from 'react';
-import Sidebar from '@/components/ui/layout/Sidebar';
-import Navbar from '@/components/ui/layout/Navbar';
 import {
   BarChart3,
   Database,
@@ -12,6 +10,12 @@ import {
   RefreshCcw,
   FileText,
 } from 'lucide-react';
+
+/*
+  Página principal del dashboard, mostrando un resumen de estadísticas clave,
+  módulos disponibles y actividad reciente dentro de la intranet.
+  @yjrivas
+*/
 
 const stats = [
   {
@@ -91,16 +95,9 @@ const activity = [
 ];
 
 export default function DashboardPage() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
-    <div className="min-h-screen bg-slate-50">
-      <Sidebar
-        isOpen={sidebarOpen}
-        onClose={() => setSidebarOpen(false)}
-      />
-      <Navbar onMenuClick={() => setSidebarOpen(true)} />
 
-      <main className="p-6 lg:ml-72">
+      <div className="p-4 lg:p-6">
         <section className="relative overflow-hidden rounded-[2rem] bg-gradient-to-r from-slate-950 via-blue-950 to-blue-700 p-8 text-white shadow-xl">
           <div className="absolute right-0 top-0 h-full w-1/2 opacity-20">
             <div className="h-full w-full bg-[radial-gradient(circle_at_top_right,_white,_transparent_45%)]" />
@@ -256,7 +253,6 @@ export default function DashboardPage() {
             </div>
           </div>
         </section>
-      </main>
-    </div>
+      </div>
   );
 }
