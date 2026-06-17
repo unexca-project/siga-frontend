@@ -64,7 +64,9 @@ export async function createTrabajador(
 
 export async function updateTrabajador(
   id: string,
-  payload: Partial<TrabajadorCreatePayload>
+  payload: Partial<TrabajadorCreatePayload> & {
+    fecha_egreso?: string | null;
+  }
 ): Promise<TrabajadorDetail> {
   const response = await api.patch<TrabajadorDetail>(
     `/talento-humano/trabajadores/${id}/`,
@@ -233,6 +235,118 @@ export async function reactivarTrabajador(
 ) {
   const response = await api.post(
     `/talento-humano/trabajadores/${trabajadorId}/reactivar/`
+  );
+
+  return response.data;
+}
+
+export async function actualizarCargoTrabajador(
+  trabajadorId: string,
+  relacionId: string,
+  payload: {
+    cargo?: string;
+    es_principal?: boolean;
+    fecha_inicio?: string;
+    fecha_fin?: string | null;
+  }
+) {
+  const response = await api.patch(
+    `/talento-humano/trabajadores/${trabajadorId}/cargos/${relacionId}/`,
+    payload
+  );
+
+  return response.data;
+}
+
+export async function actualizarDepartamentoTrabajador(
+  trabajadorId: string,
+  relacionId: string,
+  payload: {
+    departamento?: string;
+    es_principal?: boolean;
+    fecha_inicio?: string;
+    fecha_fin?: string | null;
+  }
+) {
+  const response = await api.patch(
+    `/talento-humano/trabajadores/${trabajadorId}/departamentos/${relacionId}/`,
+    payload
+  );
+
+  return response.data;
+}
+
+export async function actualizarTelefonoTrabajador(
+  trabajadorId: string,
+  telefonoId: string,
+  payload: {
+    tipo_telefono?: string;
+    numero?: string;
+    es_principal?: boolean;
+  }
+) {
+  const response = await api.patch(
+    `/talento-humano/trabajadores/${trabajadorId}/telefonos/${telefonoId}/`,
+    payload
+  );
+
+  return response.data;
+}
+
+export async function actualizarDireccionTrabajador(
+  trabajadorId: string,
+  direccionId: string,
+  payload: {
+    tipo_direccion?: string;
+    estado?: string;
+    municipio?: string;
+    parroquia?: string;
+    calle_avenida?: string;
+    edificio_casa?: string;
+    piso?: string;
+    punto_referencia?: string;
+    direccion_detallada?: string;
+    es_principal?: boolean;
+  }
+) {
+  const response = await api.patch(
+    `/talento-humano/trabajadores/${trabajadorId}/direcciones/${direccionId}/`,
+    payload
+  );
+
+  return response.data;
+}
+
+export async function actualizarContactoEmergencia(
+  trabajadorId: string,
+  contactoId: string,
+  payload: {
+    nombres?: string;
+    apellidos?: string;
+    parentesco?: string;
+    es_principal?: boolean;
+  }
+) {
+  const response = await api.patch(
+    `/talento-humano/trabajadores/${trabajadorId}/contactos-emergencia/${contactoId}/`,
+    payload
+  );
+
+  return response.data;
+}
+
+export async function actualizarTelefonoContactoEmergencia(
+  contactoId: string,
+  telefonoId: string,
+  payload: {
+    tipo_telefono?: string;
+    numero?: string;
+    es_principal?: boolean;
+  }
+) {
+  const response = await api.patch(
+    `/talento-humano/contactos-emergencia/${contactoId}/telefonos/${telefonoId}/`,
+    payload
   );
 
   return response.data;
