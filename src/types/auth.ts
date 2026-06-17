@@ -5,6 +5,7 @@ export interface User {
   nombre?: string;
   apellido?: string;
   rol?: string | null;
+  permissions?: string[];
 }
 export interface TokenResponse {
   access: string;

@@ -17,6 +17,7 @@ import {
   X,
   PanelLeftClose,
   PanelLeftOpen,
+  UserRoundCog,
 } from 'lucide-react';
 
 /*
@@ -38,6 +39,7 @@ const items = [
   { id: 'sidebar-activos', label: 'Gestión de Activos', href: '/dashboard/activos', icon: Database },
   { id: 'sidebar-formatos', label: 'Formatos y Normativas', href: '/dashboard/formatos', icon: FileText },
   { id: 'sidebar-metricas', label: 'Métricas Operativas', href: '/dashboard/metricas', icon: BarChart3 },
+  {id: 'sidebar-talento-humano',label: 'Talento Humano', href: '/dashboard/talento-humano/trabajadores',icon: UserRoundCog},
   { id: 'sidebar-usuarios', label: 'Usuarios', href: '/dashboard/usuarios', icon: Users },
   { id: 'sidebar-configuracion', label: 'Configuración', href: '/dashboard/configuracion', icon: Settings },
 ];
