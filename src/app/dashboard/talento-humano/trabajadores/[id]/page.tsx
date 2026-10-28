@@ -3,7 +3,9 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, Pencil } from 'lucide-react';
+import { ArrowLeft, Pencil, FileText } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
+import GenerarConstanciaModal from '@/components/trabajadores/GenerarConstanciaModal';
 
 import { getTrabajadorById } from '@/services/talentoHumanoService';
 import type { TrabajadorDetail } from '@/types/talentoHumano';
@@ -15,6 +17,13 @@ export default function VerTrabajadorPage() {
 
   const [loading, setLoading] = useState(true);
   const [trabajador, setTrabajador] = useState<TrabajadorDetail | null>(null);
+  const [modalConstanciaAbierto, setModalConstanciaAbierto] = useState(false);
+
+  const { user } = useAuth();
+  const puedeEmitirConstancia = Boolean(
+    user?.permissions?.includes('*') ||
+    user?.permissions?.includes('constancias_emitir')
+  );
 
   useEffect(() => {
     cargarTrabajador();
@@ -72,7 +81,7 @@ export default function VerTrabajadorPage() {
           </p>
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
           <button
             type="button"
             onClick={() => router.push('/dashboard/talento-humano/trabajadores')}
@@ -81,6 +90,17 @@ export default function VerTrabajadorPage() {
             <ArrowLeft size={18} />
             Volver
           </button>
+
+          {puedeEmitirConstancia && (
+            <button
+              type="button"
+              onClick={() => setModalConstanciaAbierto(true)}
+              className="inline-flex items-center gap-2 rounded-xl border border-blue-600 px-4 py-2 text-sm font-semibold text-blue-600 hover:bg-blue-50"
+            >
+              <FileText size={18} />
+              Generar constancia
+            </button>
+          )}
 
           <Link
             href={`/dashboard/talento-humano/trabajadores/${trabajador.id}/editar`}
@@ -195,6 +215,14 @@ export default function VerTrabajadorPage() {
             )}
         </Card>
       </section>
+
+      {modalConstanciaAbierto && (
+        <GenerarConstanciaModal
+          trabajadorId={trabajadorId}
+          nombreTrabajador={`${trabajador.nombres} ${trabajador.apellidos}`}
+          onClose={() => setModalConstanciaAbierto(false)}
+        />
+      )}
     </div>
   );
 }

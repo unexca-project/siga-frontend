@@ -351,3 +351,20 @@ export async function actualizarTelefonoContactoEmergencia(
 
   return response.data;
 }
+/**
+ * Obtiene la constancia de trabajo sin salario en formato PDF.
+ * La autorización se realiza mediante el interceptor JWT de Axios.
+ */
+export async function generarConstanciaSinSalario(
+  trabajadorId: string
+): Promise<Blob> {
+  const response = await api.get<Blob>(
+    `/talento-humano/trabajadores/${encodeURIComponent(trabajadorId)}/constancias/`,
+    {
+      params: { tipo: 'sin_salario' },
+      responseType: 'blob',
+    }
+  );
+
+  return response.data;
+}
